@@ -1,0 +1,8 @@
+fun convertToAnime(bitmap: Bitmap): Bitmap {
+    val interpreter = Interpreter(loadModelFile())
+    val inputImage = preprocessImage(bitmap)
+    val outputBuffer = TensorBuffer.createFixedSize(intArrayOf(1, 256, 256, 3), DataType.FLOAT32)
+    
+    interpreter.run(inputImage, outputBuffer.buffer)
+    return postprocessImage(outputBuffer)
+}
